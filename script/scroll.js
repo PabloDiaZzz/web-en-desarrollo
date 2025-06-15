@@ -24,7 +24,7 @@ mainMenu.addEventListener('wheel', (e) => {
 
 const os = OverlayScrollbars(document.body, {
     scrollbars: {
-        autoHide: 'scroll', // 'scroll' | 'leave' | 'never' | 'always'
+        autoHide: 'scroll',
         autoHideDelay: 250,
     }
 });
