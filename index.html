@@ -22,32 +22,32 @@
                 <li>La mejor ubicación</li>
             </ol>
         </div>
-        <div class="menu show">
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
-        <div class="main-menu">
-            <div class="menuico">
-                <img src="img/icono-hotel.webp" alt="">
-            </div>
-            <div class="menublur">
-                <ul style="list-style-type: none;">
-                    <li>Opcion 1</li>
-                    <li>Opcion 2</li>
-                    <li>Opcion 3</li>
-                    <li>Opcion 4</li>
-                </ul>
-            </div>
-        </div>
-        <div class="botones">
+        <div class="botones no-select">
             <div class="icono" style="--img: url(../img/a.svg)"></div>
             <div class="icono" style="--img: url(../img/b.svg)"></div>
             <div class="icono" style="--img: url(../img/c.svg)"></div>
         </div>
     </header>
+    <div class="menu show no-select">
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <div class="main-menu">
+        <div class="menuico no-select">
+            <img class="menuico-img" src="img/icono-hotel.webp" alt="">
+        </div>
+        <div class="menublur no-select">
+            <ul style="list-style-type: none;">
+                <li>Opcion 1</li>
+                <li>Opcion 2</li>
+                <li>Opcion 3</li>
+                <li>Opcion 4</li>
+            </ul>
+        </div>
+    </div>
     <div id="content" style="height: 1000px;">web de ejemplo</div>
 </body>
-<script src="script/tittle.js"></script>
+<script type="module" src="script/tittle.js"></script>
 <script type="module" src="script/scroll.js"></script>
-
+<script src="script/utils.js"></script>
 </html>

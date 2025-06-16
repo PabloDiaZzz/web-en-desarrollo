@@ -1,3 +1,5 @@
+import { enableScroll, disableScroll } from './scroll.js';
+
 const header = document.querySelector('#sticky-parallax-header');
 const tittle = document.querySelector('.header-tittle');
 const sub = document.querySelector('.header-subtittle');
@@ -9,17 +11,20 @@ const trigger85 = window.innerHeight * 0.85;
 const trigger88 = window.innerHeight * 0.88;
 let botonesAnimados = false;
 let menuAnimado = false;
+let wheelHandler = null;
 
 menu.addEventListener('click', () => {
     menu.classList.toggle('active');
     if (menu.classList.contains('active')) {
+        disableScroll();
+        wheelHandler = (e) => {
+            e.stopPropagation();
+            e.preventDefault(); 
+        };
+        document.body.addEventListener('wheel', wheelHandler, { passive: false });
         document.querySelector('.main-menu').animate({
-            opacity: [0, 1],
-            display: ['none', 'flex'],
-            backdropFilter: ['blur(0px)', 'blur(30px)'],
-            backgroundColor: ['transparent', 'rgba(0, 0, 0, 0.7)'],
+            backdropFilter: ['blur(0px)', 'blur(50px)'],
         }, {
-            allowDiscrete: true,
             easing: "ease",
             duration: 500,
             fill: "both",
@@ -39,14 +44,22 @@ menu.addEventListener('click', () => {
             duration: 500,
             fill: "both",
         });
-    } else {
-        document.querySelector('.main-menu').animate({
-            opacity: [1, 0],
-            display: ['flex', 'none'],
-            backdropFilter: ['blur(30px)', 'blur(0px)'],
-            backgroundColor: ['rgba(0, 0, 0, 0.7)', 'transparent'],
+        document.querySelector('.menuico-img').animate({
+            opacity: [0, 1],
         }, {
-            allowDiscrete: true,
+            delay: 200,
+            easing: "ease",
+            duration: 850,
+            fill: "both",
+        });
+    } else {
+        if (wheelHandler) {
+            document.body.removeEventListener('wheel', wheelHandler);
+        }
+        enableScroll();
+        document.querySelector('.main-menu').animate({
+            backdropFilter: ['blur(50px)', 'blur(0px)'],
+        }, {
             easing: "ease",
             duration: 500,
             fill: "both",
@@ -59,6 +72,13 @@ menu.addEventListener('click', () => {
             fill: "both",
         });
         document.querySelector('.menuico').animate({
+            opacity: [1, 0],
+        }, {
+            easing: "ease",
+            duration: 500,
+            fill: "both",
+        });
+        document.querySelector('.menuico-img').animate({
             opacity: [1, 0],
         }, {
             easing: "ease",
@@ -87,34 +107,39 @@ window.addEventListener('scroll', () => {
         if (!botonesAnimados) {
             botones.classList.add('show');
             botonesAnimados = true;
-            botones.animate({
-                display: ['none', 'flex'],
-                width: [0, calcAuto('botones')[0]],
-            }, {
-                delay: 200,
-                allowDiscrete: true,
-                easing: "ease-in",
-                duration: 600,
-                fill: "both",
-            });
+            const autoWidth = calcAuto('botones')[0];
+            if (autoWidth != 0) {
+                botones.animate({
+                    display: ['none', 'flex'],
+                    width: [0, autoWidth],
+                }, {
+                    delay: 200,
+                    allowDiscrete: true,
+                    easing: "ease-in",
+                    duration: 600,
+                    fill: "both",
+                });
+            }
 
         }
         tittle.classList.add('side');
     } else {
         sub.classList.remove('none');
         if (botonesAnimados) {
-            botones.classList.remove('show');
             botonesAnimados = false;
-            botones.animate({
-                width: [calcAuto('botones'), '0'],
-                display: ['flex', 'none'],
-            }, {
-                allowDiscrete: true,
-                easing: "ease-in",
-                duration: 600,
-                fill: "both",
-            });
-
+            const autoWidth = calcAuto('botones')[0];
+            if (autoWidth != 0) {
+                botones.classList.remove('show');
+                botones.animate({
+                    width: [autoWidth, '0'],
+                    display: ['flex', 'none'],
+                }, {
+                    allowDiscrete: true,
+                    easing: "ease-in",
+                    duration: 600,
+                    fill: "both",
+                });
+            }
         }
         tittle.classList.remove('side');
     }
