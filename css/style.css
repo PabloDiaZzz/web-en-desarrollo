@@ -7,13 +7,14 @@
 	place-items: center;
 	text-align: center;
 	font-size: calc(4vw + 1em);
-	z-index: 1;
+	z-index: 10;
 	overflow: hidden;
 	justify-content: space-around;
 	position: relative;
 	animation: compact both;
 	animation-timeline: scroll(block);
 	animation-range: 0vh 90vh;
+	pointer-events: none;
 
 	&::before {
 		top: 0;
@@ -26,12 +27,13 @@
 		background-size: cover;
 		background-position: 50% 50%;
 		background-blend-mode: soft-light;
-		z-index: 0;
+		z-index: -1;
 		transform: translate3d(0, 0, 0);
 		will-change: transform;
 		animation: blur both;
 		animation-timeline: scroll(root block);
 		animation-range: 80vh 88vh;
+		pointer-events: none;
 	}
 
 	&::after {
@@ -42,7 +44,8 @@
 		content: "";
 		position: absolute;
 		background-color: black;
-		z-index: -1;
+		z-index: -2;
+		pointer-events: none;
 	}
 
 
@@ -118,6 +121,7 @@
 	width: 0;
 	height: 40px;
 	position: absolute;
+	pointer-events: auto;
 
 	&.show {
 		display: flex;
@@ -150,7 +154,7 @@
 }
 
 .menu {
-	position: absolute;
+	position: fixed;
 	right: 20px;
 	top: 47px;
 	display: flex;
@@ -159,7 +163,7 @@
 	width: 24px;
 	height: 14px;
 	cursor: pointer;
-	z-index: 100;
+	z-index: 101;	
 
 	&::before {
 		content: "";
@@ -197,6 +201,7 @@
 }
 
 .menu {
+	pointer-events: none;
 	will-change: width, display;
 	animation: menuHide 0.3s ease both;
 	animation-delay: 200ms;
@@ -208,6 +213,7 @@
 }
 
 .menu.show {
+	pointer-events: all;
 	will-change: width, display;
 	animation: menuShow 0.3s ease both;
 	animation-delay: 600ms;
@@ -234,16 +240,19 @@
 
 .main-menu {
 	display: none;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translateX(-50%) translateY(-50%);
+	position: fixed;
+	top: 0;
 	width: 100vw;
 	height: 100vh;
-	z-index: 1;
+	z-index: 100;
 	opacity: 0;
+	pointer-events:	all;
+	backdrop-filter: blur(50px);
+	background-color: transparent;
+	transition: all 0.5s ease allow-discrete;
 
 	& .menublur {
+		will-change: left;
 		position: absolute;
 		width: 50vw;
 		height: 100vh;
@@ -251,20 +260,23 @@
 		top: 50%;
 		left: 100%;
 		transform: translateX(0) translateY(-50%);
+		transition: all 500ms ease;
 
 		& li {
+			color: white;
+			font-size: calc(4vw + 1em);
 			filter: drop-shadow(0 0px 10px rgba(255, 255, 255, 0.356)) drop-shadow(0 0px 10px rgba(0, 0, 0, 0.1));
 			transition: all 0.3s ease-in-out;
 
 			&:hover {
 				transform: scale(1.05);
 				cursor: pointer;
-				filter: drop-shadow(0 0px 10px rgba(255, 255, 255, 0.356)) drop-shadow(0 0px 10px rgba(0, 0, 0, 0.1));
+				filter: drop-shadow(0 0px 10px rgba(255, 255, 255, 0.644)) drop-shadow(0 0px 10px rgba(0, 0, 0, 0.1));
 			}
 		}
 
 		> * {
-			z-index: 1000;
+			z-index: 200;
 		}
 
 		&::before {
@@ -292,9 +304,17 @@
 		transform: translate(0, -50%);
 		
 		& img {
-			width: 400px
+			width: 400px;
 		}
 	}
+}
+
+body:has(.menu.active) .main-menu {
+	opacity: 1;
+	display: flex;
+	background-color: rgba(0, 0, 0, 0.7);
+	transition: all 0.5s ease;
+
 }
 
 @font-face {
@@ -333,6 +353,16 @@ body {
 * {
 	box-sizing: border-box;
 	transition-behavior: allow-discrete;
+}
+
+.no-select, .no-select-np {
+	user-select: none;
+	-webkit-user-drag: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	-webkit-user-select: none;
 }
 
 

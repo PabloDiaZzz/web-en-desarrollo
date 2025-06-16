@@ -7,6 +7,8 @@ import {
 
 import Lenis from 'https://esm.sh/lenis';
 
+export { enableScroll, disableScroll };
+
 const lenis = new Lenis({
     duration: 1.3,
     smooth: true,
@@ -17,18 +19,25 @@ function raf(time) {
     requestAnimationFrame(raf)
 }
 
-const mainMenu = document.querySelector('.main-menu');
-
-mainMenu.addEventListener('wheel', (e) => {
-  e.stopPropagation();  // Evita que el evento suba al body
+document.querySelector('.main-menu').addEventListener('wheel', (e) => {
+  e.stopPropagation();
   e.preventDefault(); 
 }, { passive: false });
 
-const os = OverlayScrollbars(document.body, {
+const osInstance =  OverlayScrollbars(document.body, {
     scrollbars: {
+        visibility: 'auto',
         autoHide: 'scroll',
         autoHideDelay: 250,
     }
 });
+
+function enableScroll() {
+    osInstance.options({scrollbars: {visibility: 'auto', autoHide: 'scroll', autoHideDelay: 250}})
+}
+
+function disableScroll() {
+    osInstance.options({scrollbars: {visibility: 'hidden', autoHide: 'always', autoHideDelay: 0}})
+}
 
 requestAnimationFrame(raf)
