@@ -15,10 +15,11 @@ menu.addEventListener('click', () => {
     if (menu.classList.contains('active')) {
         document.querySelector('.main-menu').animate({
             opacity: [0, 1],
-            visibility: ['hidden', 'visible'],
+            display: ['none', 'flex'],
             backdropFilter: ['blur(0px)', 'blur(30px)'],
             backgroundColor: ['transparent', 'rgba(0, 0, 0, 0.7)'],
         }, {
+            allowDiscrete: true,
             easing: "ease",
             duration: 500,
             fill: "both",
@@ -26,8 +27,9 @@ menu.addEventListener('click', () => {
         document.querySelector('.menublur').animate({
             left: ['100%', '50%'],
         }, {
+            delay: 100,
             easing: "ease",
-            duration: 500,
+            duration: 850,
             fill: "both",
         });
         document.querySelector('.menuico').animate({
@@ -37,14 +39,14 @@ menu.addEventListener('click', () => {
             duration: 500,
             fill: "both",
         });
-        
     } else {
         document.querySelector('.main-menu').animate({
             opacity: [1, 0],
-            visibility: ['visible', 'hidden'],
+            display: ['flex', 'none'],
             backdropFilter: ['blur(30px)', 'blur(0px)'],
             backgroundColor: ['rgba(0, 0, 0, 0.7)', 'transparent'],
         }, {
+            allowDiscrete: true,
             easing: "ease",
             duration: 500,
             fill: "both",

@@ -5,6 +5,8 @@ import {
     ClickScrollPlugin
 } from 'https://esm.sh/overlayscrollbars';
 
+import Lenis from 'https://esm.sh/lenis';
+
 const lenis = new Lenis({
     duration: 1.3,
     smooth: true,
