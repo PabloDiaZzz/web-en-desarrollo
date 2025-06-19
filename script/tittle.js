@@ -52,6 +52,37 @@ menu.addEventListener('click', () => {
             duration: 850,
             fill: "both",
         });
+        document.querySelectorAll('.tittle-menu').forEach((opt) => {
+            const n = Array.from(document.querySelectorAll('.tittle-menu')).indexOf(opt)
+            opt.style.visibility = 'visible';
+            opt.animate({
+                opacity: [0, 1],
+                transform: ['translateY(-20px)', 'translateY(0px)'],
+            }, {
+                delay: (600 + (n * 150)),
+                easing: "ease",
+                duration: 500,
+                fill: "both",
+            });
+        });
+        document.getElementById('back-tittles').animate({
+            opacity: [0, 1],
+            transform: ['translateY(-20px)', 'translateY(0px)'],
+        }, {
+            delay: 600 + (Array.from(document.querySelectorAll('.checkbox-menu')).indexOf(document.querySelector('.checkbox-menu:checked')) * 150),
+            easing: "ease",
+            duration: 500,
+            fill: "both",
+        });
+        document.querySelector('.separador').animate({
+            width: [0, '90%'],
+
+        }, {
+            delay: 600,
+            easing: "ease",
+            duration: 5000,
+            fill: "both",
+        });
     } else {
         if (wheelHandler) {
             document.body.removeEventListener('wheel', wheelHandler);

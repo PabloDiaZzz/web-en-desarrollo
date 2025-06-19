@@ -1,22 +1,32 @@
 const bkgnd = document.getElementById('back-tittles');
-let timeoutMove;
+let timeoutMove
 
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.checkbox-menu').forEach((e) => {
         e.addEventListener('change', (event) => {
-            document.querySelectorAll('.opcion').forEach(opt => {
-                opt.style.visibility = '';
+             // Hide all options first
+        document.querySelectorAll('.opcion').forEach(opt => {
+            opt.animate({
+                visibility: ['visible', 'hidden'],
+            }, {
+                duration: 0,
+                fill: 'both',
             });
-            const isChecked = event.target.checked;
-            if (isChecked) {
-                moveBkgndTo(event.target);
-                const optionId = event.target.id.replace('opt-menu-', '');
-                console.log(optionId)
-                const content = document.querySelector(`.opt-${optionId}`);
-                if (content) {
-                    content.style.visibility = 'visible';
-                }
+        });
+
+        if (event.target.checked) {
+            moveBkgndTo(event.target);
+            const optionId = event.target.id.replace('opt-menu-', '');
+            const content = document.querySelector(`.opt-${optionId}`);
+            if (content) {
+                content.animate({
+                visibility: ['hidden', 'visible'],
+            }, {
+                duration: 0,
+                fill: 'both',
+            });
             }
+        }
         });
     })
     const menu = document.querySelector('.menu');
@@ -39,9 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
 function moveBkgndTo(check) {
     const label = check.nextElementSibling;
     bkgnd.animate({
-        left: [, label.offsetLeft + 'px'],
-        width: [, `calc(${getComputedStyle(label).width}*1.5)`, getComputedStyle(label).width],
-        height: [, `calc(${getComputedStyle(label).height}/1.5)`, getComputedStyle(label).height],
+        left: [getComputedStyle(bkgnd).left, label.offsetLeft + 'px'],
+        width: [getComputedStyle(bkgnd).width,,, `calc(${getComputedStyle(label).width}*1.5)`,,, getComputedStyle(label).width,],
+        height: [getComputedStyle(bkgnd).height,,, `calc(${getComputedStyle(label).height}/1.5)`,,, getComputedStyle(label).height],
+
     }, {
         allowDiscrete: true,
         easing: "ease-in-out",
@@ -53,7 +64,7 @@ function moveBkgndTo(check) {
 function setBkgndTo(check) {
     const label = check.nextElementSibling;
     bkgnd.style.left = label.offsetLeft + 'px';
-     bkgnd.animate({
+    bkgnd.animate({
         left: [, label.offsetLeft + 'px'],
         width: [, `calc(${getComputedStyle(label).width}*1.5)`, getComputedStyle(label).width],
         height: [, `calc(${getComputedStyle(label).height}/1.5)`, getComputedStyle(label).height],

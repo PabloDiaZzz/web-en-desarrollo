@@ -113,7 +113,7 @@
 
 .botones {
 	right: 10px;
-	top: 47px;
+	top: 5vh;
 	transform: translateY(-50%);
 	flex-direction: row;
 	overflow: hidden;
@@ -156,7 +156,8 @@
 .menu {
 	position: fixed;
 	right: 20px;
-	top: 47px;
+	top: 5vh;
+	transform: translateY(-50%);
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -311,10 +312,10 @@ body:has(.menu.active) .main-menu {
 .tittles-menu {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-around;
-	margin-top: 1em;
+	justify-content: flex-start;
 	width: 100%;
 	align-items: center;
+	gap: 1em;
 }
 
 .checkbox-menu {
@@ -339,6 +340,7 @@ body:has(.menu.active) .main-menu {
 	z-index: 1;
 	will-change: color;
 	transition: all 0.2s ease-out;
+	opacity: 0;
 }
 
 .opcion {
@@ -368,6 +370,34 @@ body:has(.menu.active) .main-menu {
 	padding: 10px;
 	z-index: 0;
 	will-change: height, width, left;
+	opacity: 0;
+}
+
+.separador {
+	height: 2px;
+	width: 0px;
+	right: 5%;
+	background: linear-gradient(to right, var(--primer-color), var(--segundo-color));
+	transition: --segundo-color 0.5s;
+	transition-delay: 4s;
+
+
+}
+
+body:has(.menu.active) .main-menu .separador {
+	--segundo-color: green;
+}
+
+@property --primer-color {
+	syntax: '<color>';
+	initial-value: white;
+	inherits: false;
+}
+
+@property --segundo-color {
+	syntax: '<color>';
+	initial-value: transparent;
+	inherits: false;
 }
 
 @font-face {
