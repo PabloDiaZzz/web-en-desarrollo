@@ -32,7 +32,7 @@ menu.addEventListener('click', () => {
         document.querySelector('.menublur').animate({
             left: ['100%', '50%'],
         }, {
-            delay: 100,
+            delay: 200,
             easing: "ease",
             duration: 850,
             fill: "both",
@@ -60,6 +60,7 @@ menu.addEventListener('click', () => {
         document.querySelector('.main-menu').animate({
             backdropFilter: ['blur(50px)', 'blur(0px)'],
         }, {
+            delay: 250,
             easing: "ease",
             duration: 500,
             fill: "both",

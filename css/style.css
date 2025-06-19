@@ -163,7 +163,7 @@
 	width: 24px;
 	height: 14px;
 	cursor: pointer;
-	z-index: 101;	
+	z-index: 101;
 
 	&::before {
 		content: "";
@@ -246,10 +246,10 @@
 	height: 100vh;
 	z-index: 100;
 	opacity: 0;
-	pointer-events:	all;
+	pointer-events: all;
 	backdrop-filter: blur(50px);
 	background-color: transparent;
-	transition: all 0.5s ease allow-discrete;
+	transition: all 0.5s ease 0.25s allow-discrete;
 
 	& .menublur {
 		will-change: left;
@@ -257,25 +257,17 @@
 		width: 50vw;
 		height: 100vh;
 		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+		padding: 30px;
+		box-sizing: border-box;
 		top: 50%;
 		left: 100%;
 		transform: translateX(0) translateY(-50%);
 		transition: all 500ms ease;
 
-		& li {
-			color: white;
-			font-size: calc(4vw + 1em);
-			filter: drop-shadow(0 0px 10px rgba(255, 255, 255, 0.356)) drop-shadow(0 0px 10px rgba(0, 0, 0, 0.1));
-			transition: all 0.3s ease-in-out;
-
-			&:hover {
-				transform: scale(1.05);
-				cursor: pointer;
-				filter: drop-shadow(0 0px 10px rgba(255, 255, 255, 0.644)) drop-shadow(0 0px 10px rgba(0, 0, 0, 0.1));
-			}
-		}
-
-		> * {
+		>* {
 			z-index: 200;
 		}
 
@@ -302,7 +294,7 @@
 		top: 50%;
 		left: 0;
 		transform: translate(0, -50%);
-		
+
 		& img {
 			width: 400px;
 		}
@@ -313,8 +305,69 @@ body:has(.menu.active) .main-menu {
 	opacity: 1;
 	display: flex;
 	background-color: rgba(0, 0, 0, 0.7);
-	transition: all 0.5s ease;
+	transition: all 0.5s ease allow-discrete;
+}
 
+.tittles-menu {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	margin-top: 1em;
+	width: 100%;
+	align-items: center;
+}
+
+.checkbox-menu {
+	width: 0;
+	height: 0;
+	opacity: 0;
+
+	&:not(:checked)+.tittle-menu:hover {
+		scale: 1.05;
+		filter: drop-shadow(0 0px 10px rgba(255, 255, 255, 0.486));
+	}
+}
+
+.tittle-menu {
+	cursor: pointer;
+	color: white;
+	mix-blend-mode: difference;
+	padding: 10px;
+	border-radius: 20px;
+	font-size: 2em;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	z-index: 1;
+	will-change: color;
+	transition: all 0.2s ease-out;
+}
+
+.opcion {
+	will-change: visibility;
+	visibility: hidden;
+
+	& li {
+		color: white;
+		font-size: calc(4vw + 1em);
+		filter: drop-shadow(0 0px 10px rgba(255, 255, 255, 0.356)) drop-shadow(0 0px 10px rgba(0, 0, 0, 0.1));
+		transition: all 0.3s ease-in-out;
+
+		&:hover {
+			transform: scale(1.05);
+			cursor: pointer;
+			filter: drop-shadow(0 0px 10px rgba(255, 255, 255, 0.644)) drop-shadow(0 0px 10px rgba(0, 0, 0, 0.1));
+		}
+	}
+}
+
+#back-tittles {
+	position: absolute;
+	background: white;
+	height: 40px;
+	width: 40px;
+	border-radius: 20px;
+	padding: 10px;
+	z-index: 0;
+	will-change: height, width, left;
 }
 
 @font-face {
@@ -348,14 +401,15 @@ body {
 		background-color: rgba(80, 80, 80, 0.514);
 	}
 }
-	
+
 
 * {
 	box-sizing: border-box;
 	transition-behavior: allow-discrete;
 }
 
-.no-select, .no-select-np {
+.no-select,
+.no-select-np {
 	user-select: none;
 	-webkit-user-drag: none;
 	-webkit-user-select: none;

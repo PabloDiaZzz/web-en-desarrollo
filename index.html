@@ -37,12 +37,27 @@
             <img class="menuico-img" src="img/icono-hotel.webp" alt="">
         </div>
         <div class="menublur no-select">
-            <ul style="list-style-type: none;">
-                <li>Opcion 1</li>
-                <li>Opcion 2</li>
-                <li>Opcion 3</li>
-                <li>Opcion 4</li>
-            </ul>
+            <div class="tittles-menu">
+                <input type="radio" name="opt-menu" id="opt-menu-1" class="checkbox-menu">
+                <label for="opt-menu-1" class="tittle-menu">Menu 1</label>
+                <input type="radio" name="opt-menu" id="opt-menu-2" class="checkbox-menu">
+                <label for="opt-menu-2" class="tittle-menu">Menu 2</label>
+                <input type="radio" name="opt-menu" id="opt-menu-3" class="checkbox-menu">
+                <label for="opt-menu-3" class="tittle-menu">Menu 3</label>
+                <div id="back-tittles"></div>
+            </div>
+            <div class="opcion opt-1" style="visibility: visible;">
+                <ul style="list-style-type: none;">
+                    <li>Opcion 1</li>
+                    <li>Opcion 2</li>
+                    <li>Opcion 3</li>
+                    <li>Opcion 4</li>
+                </ul>
+            </div>
+            <div class="opcion opt-2">
+            </div>
+            <div class="opcion opt-3">
+            </div>
         </div>
     </div>
     <div id="content" style="height: 1000px;">web de ejemplo</div>
@@ -50,4 +65,5 @@
 <script type="module" src="script/tittle.js"></script>
 <script type="module" src="script/scroll.js"></script>
 <script src="script/utils.js"></script>
+<script src="script/menu.js"></script>
 </html>
