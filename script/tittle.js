@@ -14,6 +14,17 @@ let menuAnimado = false;
 let wheelHandler = null;
 
 menu.addEventListener('click', () => {
+    menu.animate({
+        opacity: [1, 0, 0] ,
+    }, {
+        delay: 0,
+        pseudoElement: "::before",
+        easing: "ease-out",
+        duration: 800,
+        iterations: 2,
+        direction: "alternate",
+        fill: "both",
+    });
     menu.classList.toggle('active');
     if (menu.classList.contains('active')) {
         disableScroll();
@@ -75,12 +86,11 @@ menu.addEventListener('click', () => {
             fill: "both",
         });
         document.querySelector('.separador').animate({
-            width: [0, '90%'],
-
+            backgroundPositionX: ['100%','0%'],
         }, {
-            delay: 600,
+            delay: 1200,
             easing: "ease",
-            duration: 5000,
+            duration: 1000,
             fill: "both",
         });
     } else {
@@ -116,6 +126,25 @@ menu.addEventListener('click', () => {
             easing: "ease",
             duration: 500,
             fill: "both",
+        });
+        document.querySelectorAll('.tittle-menu, #back-tittles').forEach((opt) => {
+            opt.animate({
+                opacity: [1, 0],
+                transform: ['translateY(0px)', 'translateY(-20px)'],
+            }, {
+                delay: 0,
+                easing: "ease",
+                duration: 250,
+                fill: "both",
+            });
+        });
+        document.querySelector('.separador').animate({
+            width: ['calc(100% - 60px)', '0%'],
+        }, {
+            delay: 0,
+            easing: "cubic-bezier(0, 1, 0.5, 1)",
+            duration: 600,
+            fill: "backwards",
         });
     }
 });

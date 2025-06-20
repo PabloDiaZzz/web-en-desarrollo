@@ -248,7 +248,7 @@
 	z-index: 100;
 	opacity: 0;
 	pointer-events: all;
-	backdrop-filter: blur(50px);
+	backdrop-filter: blur(20px);
 	background-color: transparent;
 	transition: all 0.5s ease 0.25s allow-discrete;
 
@@ -374,30 +374,15 @@ body:has(.menu.active) .main-menu {
 }
 
 .separador {
+	position: absolute;
+	top: 100px;
+	left: 30px;
+	margin: 0;
 	height: 2px;
-	width: 0px;
-	right: 5%;
-	background: linear-gradient(to right, var(--primer-color), var(--segundo-color));
-	transition: --segundo-color 0.5s;
-	transition-delay: 4s;
-
-
-}
-
-body:has(.menu.active) .main-menu .separador {
-	--segundo-color: green;
-}
-
-@property --primer-color {
-	syntax: '<color>';
-	initial-value: white;
-	inherits: false;
-}
-
-@property --segundo-color {
-	syntax: '<color>';
-	initial-value: transparent;
-	inherits: false;
+	width: calc(100% - 60px);
+	border-radius: 20px;
+	background: linear-gradient(to right, white, white, transparent, transparent);
+	background-size: 400% 100%;
 }
 
 @font-face {
