@@ -28,6 +28,9 @@ menu.addEventListener('click', () => {
     });
     menu.classList.toggle('active');
     if (menu.classList.contains('active')) {
+        setTimeout(() => {
+            hideOptions(document.querySelector('.checkbox-menu:checked'));
+        }, 1);
         disableScroll();
         wheelHandler = (e) => {
             e.stopPropagation();
@@ -245,14 +248,22 @@ window.addEventListener('load', () => {
     }, 100);
 });
 
-function calcAuto(cls) {
-    const clone = document.querySelector(`.${cls}`).cloneNode(true);
+function calcAuto(param) {
+    let element;
+    if (typeof param === 'string') {
+        element = document.querySelector(`.${param}`);
+    } else if (param instanceof HTMLElement) {
+        element = param;
+    } else {
+        throw new Error('calcAuto: param must be a string or an HTMLElement');
+    }
+    const clone = element.cloneNode(true);
     clone.style.visibility = 'hidden';
     clone.style.position = 'absolute';
     clone.style.width = 'auto';
     clone.style.height = 'auto';
     clone.style.pointerEvents = 'none';
-    document.querySelector(`.${cls}`).parentElement.appendChild(clone);
+    element.parentElement.appendChild(clone);
 
     const width = clone.offsetWidth + 'px';
     const height = clone.offsetHeight + 'px';
