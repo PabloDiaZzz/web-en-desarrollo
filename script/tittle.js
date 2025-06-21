@@ -1,4 +1,5 @@
 import { enableScroll, disableScroll } from './scroll.js';
+import { hideOptions } from './menu.js'
 
 const header = document.querySelector('#sticky-parallax-header');
 const tittle = document.querySelector('.header-tittle');
@@ -40,14 +41,26 @@ menu.addEventListener('click', () => {
             duration: 500,
             fill: "both",
         });
-        document.querySelector('.menublur').animate({
-            left: ['100%', '50%'],
-        }, {
-            delay: 200,
-            easing: "ease",
-            duration: 850,
-            fill: "both",
-        });
+        if (window.innerWidth > 768) {
+            document.querySelector('.menublur').animate({
+                left: ['100%', '50%'],
+            }, {
+                delay: 200,
+                easing: "ease",
+                duration: 850,
+                fill: "both",
+            });
+        } else {
+            document.querySelector('.menublur').animate({
+                left: ['100%', '50%'],
+                transform: ['translateX(0) translateY(-50%)', 'translateX(-50%) translateY(-50%)'],
+            }, {
+                delay: 200,
+                easing: "ease",
+                duration: 850,
+                fill: "both",
+            });
+        }
         document.querySelector('.menuico').animate({
             opacity: [0, 1],
         }, {
@@ -106,13 +119,24 @@ menu.addEventListener('click', () => {
             duration: 500,
             fill: "both",
         });
-        document.querySelector('.menublur').animate({
-            left: ['50%', '100%'],
-        }, {
-            easing: "ease",
-            duration: 500,
-            fill: "both",
-        });
+        if (window.innerWidth > 768) {
+            document.querySelector('.menublur').animate({
+                left: ['50%', '100%'],
+            }, {
+                easing: "ease",
+                duration: 500,
+                fill: "both",
+            });
+        } else {
+            document.querySelector('.menublur').animate({
+                left: ['50%', '100%'],
+                transform: ['translateX(-50%) translateY(-50%)', 'translateX(0%) translateY(-50%)'],
+            }, {
+                easing: "ease",
+                duration: 500,
+                fill: "both",
+            });
+        }
         document.querySelector('.menuico').animate({
             opacity: [1, 0],
         }, {

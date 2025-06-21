@@ -24,6 +24,11 @@ document.querySelector('.main-menu').addEventListener('wheel', (e) => {
   e.preventDefault(); 
 }, { passive: false });
 
+document.querySelector('.main-menu').addEventListener('touchmove', (e) => {
+    e.stopPropagation();
+    e.preventDefault(); 
+}, { passive: false });
+
 const osInstance =  OverlayScrollbars(document.body, {
     scrollbars: {
         visibility: 'auto',
