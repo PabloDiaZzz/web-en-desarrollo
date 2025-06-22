@@ -13,10 +13,13 @@ const trigger88 = window.innerHeight * 0.88;
 let botonesAnimados = false;
 let menuAnimado = false;
 let wheelHandler = null;
+let animacionBotones = null;
+let animacionMenu = null;
+let animacionMenuBefore = null;
 
 menu.addEventListener('click', () => {
     menu.animate({
-        opacity: [1, 0, 0] ,
+        opacity: [1, 0, 0],
     }, {
         delay: 0,
         pseudoElement: "::before",
@@ -24,7 +27,7 @@ menu.addEventListener('click', () => {
         duration: 800,
         iterations: 2,
         direction: "alternate",
-        fill: "both",
+        fill: "backwards",
     });
     menu.classList.toggle('active');
     if (menu.classList.contains('active')) {
@@ -34,7 +37,7 @@ menu.addEventListener('click', () => {
         disableScroll();
         wheelHandler = (e) => {
             e.stopPropagation();
-            e.preventDefault(); 
+            e.preventDefault();
         };
         document.body.addEventListener('wheel', wheelHandler, { passive: false });
         document.querySelector('.main-menu').animate({
@@ -102,7 +105,7 @@ menu.addEventListener('click', () => {
             fill: "both",
         });
         document.querySelector('.separador').animate({
-            backgroundPositionX: ['100%','0%'],
+            backgroundPositionX: ['100%', '0%'],
         }, {
             delay: 1200,
             easing: "ease",
@@ -176,17 +179,32 @@ menu.addEventListener('click', () => {
     }
 });
 
+const autoWidth = calcAuto('botones')[0];
+    if (!animacionBotones) {
+        animacionBotones = botones.animate({
+            display: ['none', 'flex'],
+            width: [0, autoWidth],
+        }, {
+            delay: 200,
+            allowDiscrete: true,
+            easing: "ease-in",
+            duration: 600,
+            fill: "both",
+        });
+        animacionBotones.pause();
+    }
+
 window.addEventListener('scroll', () => {
 
     if (window.scrollY >= trigger60) {
-        if (!menuAnimado && !menu.classList.contains('active')) {
+        if (menuAnimado) {
             menu.classList.remove('show');
-            menuAnimado = true;
+            menuAnimado = false;
         }
     } else {
-        if (menuAnimado && !menu.classList.contains('active')) {
+        if (!menuAnimado) {
             menu.classList.add('show');
-            menuAnimado = false;
+            menuAnimado = true;
         }
     }
 
@@ -195,38 +213,20 @@ window.addEventListener('scroll', () => {
         if (!botonesAnimados) {
             botones.classList.add('show');
             botonesAnimados = true;
-            const autoWidth = calcAuto('botones')[0];
             if (autoWidth != 0) {
-                botones.animate({
-                    display: ['none', 'flex'],
-                    width: [0, autoWidth],
-                }, {
-                    delay: 200,
-                    allowDiscrete: true,
-                    easing: "ease-in",
-                    duration: 600,
-                    fill: "both",
-                });
+                animacionBotones.playbackRate = 1;
+                animacionBotones.play();
             }
-
         }
         tittle.classList.add('side');
     } else {
         sub.classList.remove('none');
         if (botonesAnimados) {
+            botones.classList.remove('show');
             botonesAnimados = false;
-            const autoWidth = calcAuto('botones')[0];
             if (autoWidth != 0) {
-                botones.classList.remove('show');
-                botones.animate({
-                    width: [autoWidth, '0'],
-                    display: ['flex', 'none'],
-                }, {
-                    allowDiscrete: true,
-                    easing: "ease-in",
-                    duration: 600,
-                    fill: "both",
-                });
+                animacionBotones.playbackRate = -1;
+                animacionBotones.play()
             }
         }
         tittle.classList.remove('side');
@@ -244,8 +244,19 @@ window.addEventListener('load', () => {
             botones.classList.add('show');
             sub.classList.add('none');
             botonesAnimados = true;
+        } else {
+            botones.classList.remove('show');
+            sub.classList.remove('none');
         }
-    }, 100);
+
+        if (autoWidth >= trigger60) {
+            menu.classList.remove('show');
+            menuAnimado = false;
+        } else {
+            menu.classList.add('show');
+            menuAnimado = true;
+        }
+    }, 200);
 });
 
 function calcAuto(param) {
@@ -258,6 +269,7 @@ function calcAuto(param) {
         throw new Error('calcAuto: param must be a string or an HTMLElement');
     }
     const clone = element.cloneNode(true);
+    clone.style.display = 'flex';
     clone.style.visibility = 'hidden';
     clone.style.position = 'absolute';
     clone.style.width = 'auto';
