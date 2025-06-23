@@ -423,6 +423,10 @@ body:has(.menu.active) .main-menu {
 			}
 		}
 	}
+
+	.header-subtittle {
+		padding-inline: 10px;
+	}
 }
 
 @media (prefers-color-scheme: dark) {
