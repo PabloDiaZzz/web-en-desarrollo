@@ -10,3 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
         element.setAttribute('draggable', false);
     })
 })
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('img').forEach((el) => {
+        if (!!el.dataset.src) {
+            el.src = el.dataset.src;
+        }
+    });
+})

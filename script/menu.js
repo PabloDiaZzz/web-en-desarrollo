@@ -12,6 +12,7 @@ const menu = document.querySelector('.menu');
     menu.addEventListener('click', handleFirstClick);
 
 document.addEventListener('DOMContentLoaded', () => {
+
     document.querySelectorAll('.checkbox-menu').forEach((e) => {
         e.addEventListener('change', (event) => {
             document.querySelectorAll('.opcion').forEach(opt => {
