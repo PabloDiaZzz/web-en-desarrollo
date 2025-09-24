@@ -4,12 +4,12 @@ let timeoutMove
 export { hideOptions }
 
 const menu = document.querySelector('.menu');
-    const handleFirstClick = () => {
-        document.getElementById('opt-menu-1').setAttribute('checked', '');
-        moveBkgndTo(document.getElementById('opt-menu-1'));
-        menu.removeEventListener('click', handleFirstClick);
-    };
-    menu.addEventListener('click', handleFirstClick);
+const handleFirstClick = () => {
+    document.getElementById('opt-menu-1').setAttribute('checked', '');
+    moveBkgndTo(document.getElementById('opt-menu-1'));
+    menu.removeEventListener('click', handleFirstClick);
+};
+menu.addEventListener('click', handleFirstClick);
 
 document.addEventListener('DOMContentLoaded', () => {
 

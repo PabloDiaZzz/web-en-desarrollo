@@ -1,9 +1,7 @@
 @view-transition {
-<<<<<<< HEAD
-	navigation: auto;
-=======
-  navigation: auto;
->>>>>>> 29de8f18fb14dda692b5912b65a5bfecc8e75da4
+	<<<<<<< HEAD navigation: auto;
+	=======navigation: auto;
+	>>>>>>>29de8f18fb14dda692b5912b65a5bfecc8e75da4
 }
 
 #sticky-parallax-header {

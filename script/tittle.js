@@ -180,19 +180,19 @@ menu.addEventListener('click', () => {
 });
 
 const autoWidth = calcAuto('botones')[0];
-    if (!animacionBotones) {
-        animacionBotones = botones.animate({
-            display: ['none', 'flex'],
-            width: [0, autoWidth],
-        }, {
-            delay: 200,
-            allowDiscrete: true,
-            easing: "ease-in",
-            duration: 600,
-            fill: "both",
-        });
-        animacionBotones.pause();
-    }
+if (!animacionBotones) {
+    animacionBotones = botones.animate({
+        display: ['none', 'flex'],
+        width: [0, autoWidth],
+    }, {
+        delay: 200,
+        allowDiscrete: true,
+        easing: "ease-in",
+        duration: 600,
+        fill: "both",
+    });
+    animacionBotones.pause();
+}
 
 window.addEventListener('scroll', () => {
 

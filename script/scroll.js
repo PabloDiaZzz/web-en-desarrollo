@@ -20,16 +20,16 @@ function raf(time) {
 }
 
 document.querySelector('.main-menu').addEventListener('wheel', (e) => {
-  e.stopPropagation();
-  e.preventDefault(); 
+    e.stopPropagation();
+    e.preventDefault();
 }, { passive: false });
 
 document.querySelector('.main-menu').addEventListener('touchmove', (e) => {
     e.stopPropagation();
-    e.preventDefault(); 
+    e.preventDefault();
 }, { passive: false });
 
-const osInstance =  OverlayScrollbars(document.body, {
+const osInstance = OverlayScrollbars(document.body, {
     scrollbars: {
         visibility: 'auto',
         autoHide: 'scroll',
@@ -38,11 +38,11 @@ const osInstance =  OverlayScrollbars(document.body, {
 });
 
 function enableScroll() {
-    osInstance.options({scrollbars: {visibility: 'auto', autoHide: 'scroll', autoHideDelay: 250}})
+    osInstance.options({ scrollbars: { visibility: 'auto', autoHide: 'scroll', autoHideDelay: 250 } })
 }
 
 function disableScroll() {
-    osInstance.options({scrollbars: {visibility: 'hidden', autoHide: 'always', autoHideDelay: 0}})
+    osInstance.options({ scrollbars: { visibility: 'hidden', autoHide: 'always', autoHideDelay: 0 } })
 }
 
 requestAnimationFrame(raf)
